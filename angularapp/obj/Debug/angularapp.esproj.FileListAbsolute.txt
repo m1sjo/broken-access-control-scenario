@@ -1,0 +1,2 @@
+C:\Users\Daniel\Documents\My_Documents\FH_WN\Kurse\4.Semester\IT-Sicherheit\Übung_2 Broken_Access_Control\broken-access-control-scenario\angularapp\obj\Debug\angularapp.esproj.SuggestedBindingRedirects.cache
+C:\Users\Daniel\Documents\My_Documents\FH_WN\Kurse\4.Semester\IT-Sicherheit\Übung_2 Broken_Access_Control\broken-access-control-scenario\angularapp\obj\Debug\angularapp.esproj.CoreCompileInputs.cache
