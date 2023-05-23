@@ -1,11 +1,22 @@
-<!DOCTYPE html>
+<h1 id="dashboardLabel">Dashboard</h1>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title>Dashboard</title>
-</head>
-<body>
+<p>This component demonstrates fetching data from the server.</p>
 
-</body>
-</html>
+<p *ngIf="!homeInfo"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
+
+<table *ngIf="homeInfo">
+  <thead>
+    <tr>
+      <th>Temperature (C)</th>
+      <th>Humidity</th>
+      <th>Ligth On/Off</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let home of homeInfo">
+      <td>{{ home.temperature }}</td>
+      <td>{{ home.humidity }}</td>
+      <td>{{ home.lightState }}</td>
+    </tr>
+  </tbody>
+</table>
