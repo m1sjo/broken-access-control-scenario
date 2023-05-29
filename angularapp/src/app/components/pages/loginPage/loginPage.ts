@@ -24,8 +24,8 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ['username', Validators.required],
+      password: ['password', Validators.required]
     });
   }
 
@@ -49,7 +49,7 @@ export class LoginPage implements OnInit {
       .subscribe({
         next: () => {
           // get return url from query parameters or default to home page
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          const returnUrl = this.route.snapshot.queryParams['dashboard'] || '/';
           this.router.navigateByUrl(returnUrl);
         },
         error: error => {

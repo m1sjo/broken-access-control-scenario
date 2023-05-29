@@ -1,24 +1,26 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { AppComponent } from './app.component';
-import { Dashboard } from './components/pages/dashboard/dashboard';
+import { AppRoutingModule } from './app-routing.module';
+import { Dashboard } from './app.component';
+//import { Dashboard } from './components/pages/dashboard/dashboard';
 import { LoginPage } from './components/pages/loginPage/loginPage';
 
 @NgModule({
   declarations: [
-    AppComponent
+    Dashboard
     , LoginPage
-    , Dashboard
+    
   ],
   imports: [
-    BrowserModule, HttpClientModule
+    BrowserModule, HttpClientModule, ReactiveFormsModule, AppRoutingModule
   ],
   providers: [],
   bootstrap: [
-    AppComponent
+    Dashboard
     , LoginPage
-    , Dashboard]
+    ]
 })
 export class AppModule { }
