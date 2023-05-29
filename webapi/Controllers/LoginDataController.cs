@@ -13,7 +13,7 @@ public class LoginDataController : Controller
         new LoginData() { Username = "Patrick", Password = "IMOWBXxcCEUwi8thGPDG" }
     };
 
-    [HttpGet]
+    [HttpPost]
     public bool AreUserCredentialsCorrect(string userName, string password)
     {
         return _knownLoginData.Where(ad => ad.Username == userName && ad.Password == password).Any();
