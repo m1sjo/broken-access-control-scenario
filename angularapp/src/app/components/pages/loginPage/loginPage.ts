@@ -8,7 +8,11 @@ import {
   //AlertService
 } from '../../../services/account';
 
-@Component({ templateUrl: 'loginPage.html' })
+@Component({
+  selector: 'app-root'
+  , templateUrl: 'loginPage.html'
+  , styleUrls: ['./loginPage.css']
+})
 export class LoginPage implements OnInit {
   form!: FormGroup;
   loading = false;
@@ -49,7 +53,7 @@ export class LoginPage implements OnInit {
       .subscribe({
         next: () => {
           // get return url from query parameters or default to home page
-          const returnUrl = this.route.snapshot.queryParams['dashboard'] || '/';
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
           this.router.navigateByUrl(returnUrl);
         },
         error: error => {
