@@ -1,16 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 
 @Component({
-  //selector: 'app-root',
+  selector: 'app-dashboard',
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
 export class Dashboard {
-  public homeInfo?: SmartHomeInfo[];
+  public homeInfo?: SmartHomeInfo;
 
   constructor(http: HttpClient) {
-    http.get<SmartHomeInfo[]>('/smarthomeinfo').subscribe(result => {
+    http.get<SmartHomeInfo>(`${environment.apiUrl}/SmartHomeInformation`).subscribe(result => {
+      //console.log(result);
       this.homeInfo = result;
     }, error => console.error(error));
   }
@@ -19,7 +21,7 @@ export class Dashboard {
 }
 
 interface SmartHomeInfo {
-  temperature: number;
+  temperatur: number;
   humidity: number;
-  lightState: boolean;
+  isLightOn: boolean;
 }

@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 //import { Dashboard } from './app.component';
 import { Dashboard } from './components/pages/dashboard/dashboard';
-import { LoginPage } from './components/pages/loginPage/loginPage';
+import { LoginPage } from './app.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +19,7 @@ import { LoginPage } from './components/pages/loginPage/loginPage';
   providers: [],
   bootstrap: [
     LoginPage
+    //Dashboard
     ]
 })
 export class AppModule { }
