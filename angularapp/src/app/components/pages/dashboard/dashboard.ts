@@ -12,7 +12,6 @@ export class Dashboard {
 
   constructor(http: HttpClient) {
     http.get<SmartHomeInfo>(`${environment.apiUrl}/SmartHomeInformation`).subscribe(result => {
-      //console.log(result);
       this.homeInfo = result;
     }, error => console.error(error));
   }

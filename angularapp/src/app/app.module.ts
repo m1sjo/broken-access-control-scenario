@@ -4,12 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-//import { Dashboard } from './app.component';
 import { Dashboard } from './components/pages/dashboard/dashboard';
-import { LoginPage } from './app.component';
+import { AppComponent } from './app.component';
+import { LoginPage } from './components/pages/loginPage/loginPage';
 
 @NgModule({
   declarations: [
+    AppComponent,
     LoginPage
     , Dashboard
   ],
@@ -18,8 +19,7 @@ import { LoginPage } from './app.component';
   ],
   providers: [],
   bootstrap: [
-    LoginPage
-    //Dashboard
+    AppComponent
     ]
 })
 export class AppModule { }

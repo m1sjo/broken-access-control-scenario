@@ -6,10 +6,6 @@ import { first } from 'rxjs/operators';
 
 
 import { environment } from '../../../../environments/environment';
-import {
-  AccountService,
-  //AlertService
-} from '../../../services/account';
 
 @Component({
   selector: 'app-root'
@@ -26,7 +22,6 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private accountService: AccountService,
     private http: HttpClient
     //private alertService: AlertService
   ) { }
@@ -44,23 +39,13 @@ export class LoginPage implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // reset alerts on submit
-    //this.alertService.clear();
-
-    // stop here if form is invalid
-    //if (this.form.invalid) {
-    //  return;
-    //}
-
-    //console.log("loginPage");
     this.loading = true;
     this.http.get(`${environment.apiUrl}/LoginData?userName=${this.f['username'].value}&password=${this.f['password'].value}`)
       .subscribe((result) => {
-        //console.log("inside");
         if (result == true) {
           const returnUrl = this.route.snapshot.queryParams['dashboard'] || '/dashboard';
           console.log(returnUrl);
-          this.router.navigate(returnUrl);
+          this.router.navigate(['/dashboard']);
           console.log("route changed");
           this.invalid = false;
           return;
