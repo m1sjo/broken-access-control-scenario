@@ -10,11 +10,11 @@ public class SmartHomeInformationController : ControllerBase
     private static readonly Random _random = new();
 
     // Alternatively get from database.
-    private readonly SmartHomeInformation _smartHomeInformation = new()
+    private static readonly SmartHomeInformation _smartHomeInformation = new()
     {
         Temperatur = _random.Next(-10, 31),
         Humidity = _random.Next(0, 101),
-        IsLightOn = _random.Next(0,2) == 1,
+        IsLightOn = false
     };
 
     [HttpGet(Name = "GetSmartHomeInformation")]
@@ -39,5 +39,11 @@ public class SmartHomeInformationController : ControllerBase
     public bool GetLightState()
     {
         return _smartHomeInformation.IsLightOn;
+    }
+
+    [HttpPost("SwitchLightState")]
+    public void SwitchLightState()
+    {
+        _smartHomeInformation.IsLightOn = !_smartHomeInformation.IsLightOn;
     }
 }
