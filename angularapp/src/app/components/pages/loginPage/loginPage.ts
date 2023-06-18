@@ -6,6 +6,7 @@ import { first } from 'rxjs/operators';
 
 
 import { environment } from '../../../../environments/environment';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-root'
@@ -20,13 +21,16 @@ export class LoginPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private http: HttpClient
-    //private alertService: AlertService
-  ) { }
+    private authService: AuthService,
+    private router : Router
+    ) { }
 
   ngOnInit() {
+    if (this.authService.isLoggedIn()){
+      this.router.navigate(['/dashboard']);
+      return;
+    }
+
     this.form = this.formBuilder.group({
       username: ['username', Validators.required],
       password: ['password', Validators.required]
@@ -37,26 +41,15 @@ export class LoginPage implements OnInit {
   get f() { return this.form.controls; }
 
   onSubmit() {
-    this.submitted = true;
-
-    this.loading = true;
-    this.http.get(`${environment.apiUrl}/LoginData?userName=${this.f['username'].value}&password=${this.f['password'].value}`)
-      .subscribe((result) => {
-        if (result == true) {
-          const returnUrl = this.route.snapshot.queryParams['dashboard'] || '/dashboard';
-          console.log(returnUrl);
+    this.authService.login(this.f['username'].value, this.f['password'].value)
+      .subscribe(
+        response => {
+          this.authService.saveToken(response.token);          
           this.router.navigate(['/dashboard']);
-          console.log("route changed");
-          this.invalid = false;
-          return;
+        },
+        error => {
+          console.log(error);
         }
-
-        this.loading = false;
-        this.invalid = true;
-      },
-        () => {
-          this.loading = false;
-          console.log("error");
-        });
+      );
   }
 }
