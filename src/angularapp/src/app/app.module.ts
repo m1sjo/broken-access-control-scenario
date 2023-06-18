@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { Dashboard } from './components/pages/dashboard/dashboard';
 import { AppComponent } from './app.component';
 import { LoginPage } from './components/pages/loginPage/loginPage';
+import { AuthService } from 'src/app/services/authService';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { LoginPage } from './components/pages/loginPage/loginPage';
   imports: [
     BrowserModule, HttpClientModule, ReactiveFormsModule, AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [
     AppComponent
     ]
