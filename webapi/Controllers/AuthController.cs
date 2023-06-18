@@ -26,8 +26,7 @@ namespace webapi.Controllers
         {
             new LoginData() { Username = "Daniel", Password = "QvhCUWPY4gbY2AsuIkS9" },
             new LoginData() { Username = "Patrick", Password = "IMOWBXxcCEUwi8thGPDG" },
-            new LoginData() { Username = "Josip", Password = "Wh0N33dsAP@ssw0rd" },
-            new LoginData() { Username = "A", Password = "B" }
+            new LoginData() { Username = "Josip", Password = "Wh0N33dsAP@ssw0rd" }
         };
 
         [HttpPost("login")]
