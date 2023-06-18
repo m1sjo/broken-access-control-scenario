@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using webapi.Model;
 
 namespace webapi.Controllers;
@@ -17,33 +18,42 @@ public class SmartHomeInformationController : ControllerBase
         IsLightOn = false
     };
 
-    [HttpGet(Name = "GetSmartHomeInformation")]
-    public SmartHomeInformation Get()
+    #region Smarthome Info
+
+    [HttpGet("GetInfo")]
+    [Authorize]
+    public ActionResult<SmartHomeInformation> GetSmartHomeInfo()
     {
-        return _smartHomeInformation;
+        return Ok(_smartHomeInformation);
     }
 
     [HttpGet("GetTemperature")]
-    public int GetTemperature()
+    [Authorize]
+    public ActionResult<int> GetTemperature()
     {
-        return _smartHomeInformation.Temperatur;
+        return Ok(_smartHomeInformation.Temperatur);
     }
-
+    
     [HttpGet("GetHumidity")]
-    public int GetHumidity()
+    [Authorize]
+    public ActionResult<int> GetHumidity()
     {
-        return _smartHomeInformation.Humidity;
+        return Ok(_smartHomeInformation.Humidity);
     }
-
+    
     [HttpGet("GetLightState")]
-    public bool GetLightState()
+    [Authorize]
+    public ActionResult<bool> GetLightState()
     {
-        return _smartHomeInformation.IsLightOn;
+        return Ok(_smartHomeInformation.IsLightOn);
     }
-
+     
     [HttpPost("SwitchLightState")]
+    [Authorize]
     public void SwitchLightState()
     {
         _smartHomeInformation.IsLightOn = !_smartHomeInformation.IsLightOn;
     }
+
+    #endregion Smarthome Info
 }

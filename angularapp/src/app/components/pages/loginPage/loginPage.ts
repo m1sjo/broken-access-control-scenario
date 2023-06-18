@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
-
-
-import { environment } from '../../../../environments/environment';
+import { AuthService } from 'src/app/services/authService';
 
 @Component({
   selector: 'app-root'
@@ -20,10 +16,8 @@ export class LoginPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
-    //private alertService: AlertService
+    private authenticator: AuthService,
   ) { }
 
   ngOnInit() {
@@ -36,27 +30,26 @@ export class LoginPage implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
 
+
+
   onSubmit() {
-    this.submitted = true;
+    this.invalid = false;
 
-    this.loading = true;
-    this.http.get(`${environment.apiUrl}/LoginData?userName=${this.f['username'].value}&password=${this.f['password'].value}`)
-      .subscribe((result) => {
-        if (result == true) {
-          const returnUrl = this.route.snapshot.queryParams['dashboard'] || '/dashboard';
-          console.log(returnUrl);
-          this.router.navigate(['/dashboard']);
-          console.log("route changed");
-          this.invalid = false;
-          return;
-        }
+    this.authenticator.login(this.f['username'].value, this.f['password'].value).subscribe(
+      respose => {
+        // Get the response token.
+        const token = respose.token;
 
-        this.loading = false;
-        this.invalid = true;
+        // Set the Authentication-Token.
+        this.authenticator.setAuthToken(token);
+
+        // Succesfull -> Navigate to dashbaord.
+        this.router.navigate(['/dashboard']);
       },
-        () => {
-          this.loading = false;
-          console.log("error");
-        });
+      error => {
+        this.invalid = true;
+        console.log(error)
+      }
+    )
   }
 }
